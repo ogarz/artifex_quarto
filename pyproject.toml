@@ -1,0 +1,15 @@
+[project]
+name = "artifex"
+version = "0.1.0"
+description = "Python environment for Artifex"
+requires-python = "==3.13.*"
+dependencies = [
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "seaborn",
+    "scipy",
+    "statsmodels",
+    "scikit-learn",
+    "openpyxl",
+]
