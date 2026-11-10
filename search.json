@@ -1,10 +1,17 @@
 [
   {
-    "objectID": "projects/ercot_analysis.html",
-    "href": "projects/ercot_analysis.html",
-    "title": "ERCOT Analysis",
+    "objectID": "projects/ercot_ancillary_analysis.html",
+    "href": "projects/ercot_ancillary_analysis.html",
+    "title": "ERCOT Ancillary Analysis",
     "section": "",
-    "text": "ERCOT, the Electric Reliability Council of Texas, operates the power grid for most of Texas and runs its wholesale electricity market. The grid is divided into four load zones: Houston, North, South, and West. On December 5, 2025, ERCOT launched Real-Time Co-optimization plus Batteries (RTC+B), a redesign of its real-time market. Under RTC+B, energy and ancillary services are dispatched together every five minutes, and batteries are modeled as single units. ERCOT’s goal was to give the grid more flexibility in real time and to procure energy and ancillary services more efficiently. This analysis examines how price spreads between the four load zones differ before and after RTC+B went live. Because the post-RTC+B period is short and covers different seasonal conditions, these comparisons show associations, not proof that RTC+B caused the changes.\nThe first graph shows the number of extreme price spreads by month. An extreme price spread is defined as a price spread between load zones that is in the 95th percentile of Pre-RTC+B price spreads. The graph shows that Post-RTC+B tends to have less extreme price spreads.\n\n\n\n\n\n\n\n\n\nThis next graph shows the median price spread by the hour of the day. The median spread Pre-RTC+B is higher than Post-RTC+B before 12:00 but lower after. This could show the RTC+B’s effect on efficiently storing energy throughout the day.\n\n\n\n\n\n\n\n\n\nThese next three graphs show the Western load zone’s median price difference compared to the other three load zones in ERCOT. One trend that emerges from the plots is that Post-RTC+B tends to have lower price difference between load zones with the exception of the Houston load zone, which is more volatile."
+    "text": "interval_start_local\ninterval_start_utc\ninterval_end_local\ninterval_end_utc\nas_type\nmcpc\nyear\nwindow\n\n\n\n\n0\n2024-11-20 00:00:00-06:00\n2024-11-20 06:00:00+00:00\n2024-11-20 01:00:00-06:00\n2024-11-20 07:00:00+00:00\nECRS\n0.04\n2024\nEarlier\n\n\n1\n2024-11-20 00:00:00-06:00\n2024-11-20 06:00:00+00:00\n2024-11-20 01:00:00-06:00\n2024-11-20 07:00:00+00:00\nNSPIN\n0.06\n2024\nEarlier\n\n\n2\n2024-11-20 00:00:00-06:00\n2024-11-20 06:00:00+00:00\n2024-11-20 01:00:00-06:00\n2024-11-20 07:00:00+00:00\nREGDN\n0.29\n2024\nEarlier\n\n\n3\n2024-11-20 00:00:00-06:00\n2024-11-20 06:00:00+00:00\n2024-11-20 01:00:00-06:00\n2024-11-20 07:00:00+00:00\nREGUP\n0.78\n2024\nEarlier\n\n\n4\n2024-11-20 00:00:00-06:00\n2024-11-20 06:00:00+00:00\n2024-11-20 01:00:00-06:00\n2024-11-20 07:00:00+00:00\nRRS\n0.78\n2024\nEarlier\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n6715\n2025-12-19 23:00:00-06:00\n2025-12-20 05:00:00+00:00\n2025-12-20 00:00:00-06:00\n2025-12-20 06:00:00+00:00\nECRS\n2.09\n2025\nLater\n\n\n6716\n2025-12-19 23:00:00-06:00\n2025-12-20 05:00:00+00:00\n2025-12-20 00:00:00-06:00\n2025-12-20 06:00:00+00:00\nNSPIN\n3.24\n2025\nLater\n\n\n6717\n2025-12-19 23:00:00-06:00\n2025-12-20 05:00:00+00:00\n2025-12-20 00:00:00-06:00\n2025-12-20 06:00:00+00:00\nREGDN\n0.62\n2025\nLater\n\n\n6718\n2025-12-19 23:00:00-06:00\n2025-12-20 05:00:00+00:00\n2025-12-20 00:00:00-06:00\n2025-12-20 06:00:00+00:00\nREGUP\n2.11\n2025\nLater\n\n\n6719\n2025-12-19 23:00:00-06:00\n2025-12-20 05:00:00+00:00\n2025-12-20 00:00:00-06:00\n2025-12-20 06:00:00+00:00\nRRS\n2.00\n2025\nLater\n\n\n\n\n6720 rows × 8 columns"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "artifex_quarto",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
   },
   {
     "objectID": "about.html",
@@ -14,10 +21,10 @@
     "text": "About this site"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "artifex_quarto",
+    "objectID": "projects/ercot_analysis.html",
+    "href": "projects/ercot_analysis.html",
+    "title": "ERCOT Analysis",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "ERCOT, the Electric Reliability Council of Texas, operates the power grid for most of Texas and runs its wholesale electricity market. The grid is divided into four load zones: Houston, North, South, and West. On December 5, 2025, ERCOT launched Real-Time Co-optimization plus Batteries (RTC+B), a redesign of its real-time market. Under RTC+B, energy and ancillary services are dispatched together every five minutes, and batteries are modeled as single units. ERCOT’s goal was to give the grid more flexibility in real time and to procure energy and ancillary services more efficiently. This analysis examines how price spreads between the four load zones differ before and after RTC+B went live. Because the post-RTC+B period is short and covers different seasonal conditions, these comparisons show associations, not proof that RTC+B caused the changes.\nThe first graph shows the number of extreme price spreads by month. An extreme price spread is defined as a price spread between load zones that is in the 95th percentile of Pre-RTC+B price spreads. The graph shows that Post-RTC+B tends to have less extreme price spreads.\n\n\n\n\n\n\n\n\n\nThis next graph shows the median price spread by the hour of the day. The median spread Pre-RTC+B is higher than Post-RTC+B before 12:00 but lower after. This could show the RTC+B’s effect on efficiently storing energy throughout the day.\n\n\n\n\n\n\n\n\n\nThese next three graphs show the Western load zone’s median price difference compared to the other three load zones in ERCOT. One trend that emerges from the plots is that Post-RTC+B tends to have lower price difference between load zones with the exception of the Houston load zone, which is more volatile."
   }
 ]
