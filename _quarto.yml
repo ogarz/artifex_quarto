@@ -9,7 +9,7 @@ website:
         text: Home
       - href: projects/ercot_analysis.ipynb
         text: ERCOT Analysis
-      - href: projects/ercot_ancillary_analysis.qmd
+      - href: projects/ercot_ancillary_analysis.ipynb
         text: ERCOT Ancillary Analysis
 
 
