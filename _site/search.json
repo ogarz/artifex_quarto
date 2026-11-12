@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "projects/ercot_ancillary_analysis.html",
+    "href": "projects/ercot_ancillary_analysis.html",
+    "title": "ERCOT Ancillary Analysis",
+    "section": "",
+    "text": "Ancillary services are services that support the reliable operation of the electricity grid by maintaining the balance between supply and demand, for example by providing reserve energy during outages or congestion. MCPC is the Market Clearing Price for Capacity, the price paid for each ancillary service in a given interval.\nIn this analysis of ERCOT’s ancillary services, we found a large initial spike in the daily median price after the launch of RTC+B, which then settled to a level slightly above the pre-RTC+B baseline for the same time of year in 2024."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "artifex_quarto",

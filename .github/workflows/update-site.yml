@@ -1,0 +1,47 @@
+name: Update ERCOT Website
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "23 14 * * *"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    # Also needed for the publishing step added in Stage 2.
+    permissions:
+      contents: write
+
+    # Harmless in Stage 1; tells Quarto to use uv's Python in Stage 2.
+    env:
+      QUARTO_PYTHON: ${{ github.workspace }}/.venv/bin/python
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v10.3.3
+
+      - name: Install project dependencies
+        run: uv sync --locked
+
+      - name: Download ERCOT prices
+        env:
+          GRIDSTATUS_API_KEY: ${{ secrets.GRIDSTATUS_API_KEY }}
+        run: uv run python scripts/update_ercot.py
+
+      - name: Upload CSV artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ercot-spp-data
+          path: data/ercot_spp.csv
+          if-no-files-found: error
