@@ -1,5 +1,26 @@
 [
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "projects/ercot.html",
+    "href": "projects/ercot.html",
+    "title": "ERCOT Price Snapshot",
+    "section": "",
+    "text": "import pandas as pd\nfrom IPython.display import display\n\n# This notebook is in projects/, one level below data/.\nprices = pd.read_csv(\"../data/ercot_spp.csv\")\nprint(f\"Downloaded {len(prices):,} observations\")\ndisplay(prices.head())\n\nDownloaded 1,152 observations\n\n\n\n\n\n\n\n\n\ninterval_start_local\ninterval_start_utc\ninterval_end_local\ninterval_end_utc\nlocation\nlocation_type\nmarket\nspp\n\n\n\n\n0\n2026-11-09 00:00:00-06:00\n2026-11-09 06:00:00+00:00\n2026-11-09 00:15:00-06:00\n2026-11-09 06:15:00+00:00\nLZ_HOUSTON\nLoad Zone\nREAL_TIME_15_MIN\n31.35\n\n\n1\n2026-11-09 00:00:00-06:00\n2026-11-09 06:00:00+00:00\n2026-11-09 00:15:00-06:00\n2026-11-09 06:15:00+00:00\nLZ_NORTH\nLoad Zone\nREAL_TIME_15_MIN\n58.69\n\n\n2\n2026-11-09 00:00:00-06:00\n2026-11-09 06:00:00+00:00\n2026-11-09 00:15:00-06:00\n2026-11-09 06:15:00+00:00\nLZ_SOUTH\nLoad Zone\nREAL_TIME_15_MIN\n24.91\n\n\n3\n2026-11-09 00:00:00-06:00\n2026-11-09 06:00:00+00:00\n2026-11-09 00:15:00-06:00\n2026-11-09 06:15:00+00:00\nLZ_WEST\nLoad Zone\nREAL_TIME_15_MIN\n91.95\n\n\n4\n2026-11-09 00:15:00-06:00\n2026-11-09 06:15:00+00:00\n2026-11-09 00:30:00-06:00\n2026-11-09 06:30:00+00:00\nLZ_HOUSTON\nLoad Zone\nREAL_TIME_15_MIN\n32.53"
+  },
+  {
+    "objectID": "projects/ercot_analysis.html",
+    "href": "projects/ercot_analysis.html",
+    "title": "ERCOT Analysis",
+    "section": "",
+    "text": "ERCOT, the Electric Reliability Council of Texas, operates the power grid for most of Texas and runs its wholesale electricity market. The grid is divided into four load zones: Houston, North, South, and West. On December 5, 2025, ERCOT launched Real-Time Co-optimization plus Batteries (RTC+B), a redesign of its real-time market. Under RTC+B, energy and ancillary services are dispatched together every five minutes, and batteries are modeled as single units. ERCOT’s goal was to give the grid more flexibility in real time and to procure energy and ancillary services more efficiently. This analysis examines how price spreads between the four load zones differ before and after RTC+B went live. Because the post-RTC+B period is short and covers different seasonal conditions, these comparisons show associations, not proof that RTC+B caused the changes.\nThe first graph shows the number of extreme price spreads by month. An extreme price spread is defined as a price spread between load zones that is in the 95th percentile of Pre-RTC+B price spreads. The graph shows that Post-RTC+B tends to have less extreme price spreads.\n\n\n\n\n\n\n\n\n\nThis next graph shows the median price spread by the hour of the day. The median spread Pre-RTC+B is higher than Post-RTC+B before 12:00 but lower after. This could show the RTC+B’s effect on efficiently storing energy throughout the day.\n\n\n\n\n\n\n\n\n\nThese next three graphs show the Western load zone’s median price difference compared to the other three load zones in ERCOT. One trend that emerges from the plots is that Post-RTC+B tends to have lower price difference between load zones with the exception of the Houston load zone, which is more volatile."
+  },
+  {
     "objectID": "projects/ercot_ancillary_analysis.html",
     "href": "projects/ercot_ancillary_analysis.html",
     "title": "ERCOT Ancillary Analysis",
@@ -12,19 +33,5 @@
     "title": "artifex_quarto",
     "section": "",
     "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
-  },
-  {
-    "objectID": "projects/ercot_analysis.html",
-    "href": "projects/ercot_analysis.html",
-    "title": "ERCOT Analysis",
-    "section": "",
-    "text": "ERCOT, the Electric Reliability Council of Texas, operates the power grid for most of Texas and runs its wholesale electricity market. The grid is divided into four load zones: Houston, North, South, and West. On December 5, 2025, ERCOT launched Real-Time Co-optimization plus Batteries (RTC+B), a redesign of its real-time market. Under RTC+B, energy and ancillary services are dispatched together every five minutes, and batteries are modeled as single units. ERCOT’s goal was to give the grid more flexibility in real time and to procure energy and ancillary services more efficiently. This analysis examines how price spreads between the four load zones differ before and after RTC+B went live. Because the post-RTC+B period is short and covers different seasonal conditions, these comparisons show associations, not proof that RTC+B caused the changes.\nThe first graph shows the number of extreme price spreads by month. An extreme price spread is defined as a price spread between load zones that is in the 95th percentile of Pre-RTC+B price spreads. The graph shows that Post-RTC+B tends to have less extreme price spreads.\n\n\n\n\n\n\n\n\n\nThis next graph shows the median price spread by the hour of the day. The median spread Pre-RTC+B is higher than Post-RTC+B before 12:00 but lower after. This could show the RTC+B’s effect on efficiently storing energy throughout the day.\n\n\n\n\n\n\n\n\n\nThese next three graphs show the Western load zone’s median price difference compared to the other three load zones in ERCOT. One trend that emerges from the plots is that Post-RTC+B tends to have lower price difference between load zones with the exception of the Houston load zone, which is more volatile."
   }
 ]
