@@ -11,6 +11,8 @@ website:
         text: ERCOT Analysis
       - href: projects/ercot_ancillary_analysis.ipynb
         text: ERCOT Ancillary Analysis
+      - href: projects/ercot.ipynb
+        text: ERCOT Live Settlement Point Prices
 
 
 format:
