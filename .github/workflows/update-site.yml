@@ -45,3 +45,12 @@ jobs:
           name: ercot-spp-data
           path: data/ercot_spp.csv
           if-no-files-found: error
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+      - name: Publish website
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
