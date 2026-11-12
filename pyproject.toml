@@ -12,4 +12,5 @@ dependencies = [
     "statsmodels",
     "scikit-learn",
     "openpyxl",
+    "gridstatusio>=0.16.1"
 ]
