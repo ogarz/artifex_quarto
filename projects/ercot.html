@@ -274,6 +274,89 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<div id="3059dece" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> SymLogNorm</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>RTCB_GO_LIVE <span class="op">=</span> pd.Timestamp(<span class="st">"2025-12-05"</span>)  <span class="co"># RTC+B went live Dec 5, 2025</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>TZ <span class="op">=</span> <span class="st">"America/Chicago"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_rtcb(prices, location<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> prices.copy()</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    ts <span class="op">=</span> pd.to_datetime(df[<span class="st">"interval_start_local"</span>], utc<span class="op">=</span><span class="va">True</span>, errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    df[<span class="st">"ts"</span>] <span class="op">=</span> ts.dt.tz_convert(TZ).dt.tz_localize(<span class="va">None</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">"ts"</span>, <span class="st">"spp"</span>])</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    loc <span class="op">=</span> location <span class="kw">or</span> df[<span class="st">"location"</span>].value_counts().idxmax()</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> df[df[<span class="st">"location"</span>] <span class="op">==</span> loc].copy()</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    d[<span class="st">"date"</span>] <span class="op">=</span> d[<span class="st">"ts"</span>].dt.normalize()</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    d[<span class="st">"hour"</span>] <span class="op">=</span> d[<span class="st">"ts"</span>].dt.hour</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    d[<span class="st">"era"</span>] <span class="op">=</span> np.where(d[<span class="st">"date"</span>] <span class="op">&gt;=</span> RTCB_GO_LIVE, <span class="st">"After RTC+B"</span>, <span class="st">"Before RTC+B"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> {<span class="st">"Before RTC+B"</span>: <span class="st">"#7aa2ff"</span>, <span class="st">"After RTC+B"</span>: <span class="st">"#ff5c8a"</span>}</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    heat <span class="op">=</span> d.pivot_table(index<span class="op">=</span><span class="st">"hour"</span>, columns<span class="op">=</span><span class="st">"date"</span>, values<span class="op">=</span><span class="st">"spp"</span>, aggfunc<span class="op">=</span><span class="st">"mean"</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> plt.style.context(<span class="st">"dark_background"</span>):</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        fig, (ax1, ax2) <span class="op">=</span> plt.subplots(</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>            <span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">9</span>), facecolor<span class="op">=</span><span class="st">"#0b0f19"</span>,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>            gridspec_kw<span class="op">=</span>{<span class="st">"height_ratios"</span>: [<span class="fl">1.3</span>, <span class="dv">1</span>]},</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> ax <span class="kw">in</span> (ax1, ax2):</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>            ax.set_facecolor(<span class="st">"#0b0f19"</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>            ax.spines[[<span class="st">"top"</span>, <span class="st">"right"</span>]].set_visible(<span class="va">False</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Top: date x hour heatmap</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> heat.columns.values</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>        vmax <span class="op">=</span> <span class="bu">max</span>(<span class="dv">300</span>, np.nanpercentile(heat.values, <span class="dv">99</span>))</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        im <span class="op">=</span> ax1.pcolormesh(</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>            x, np.arange(<span class="dv">24</span>), heat.reindex(<span class="bu">range</span>(<span class="dv">24</span>)).values, cmap<span class="op">=</span><span class="st">"magma"</span>,</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>            shading<span class="op">=</span><span class="st">"nearest"</span>, norm<span class="op">=</span>SymLogNorm(linthresh<span class="op">=</span><span class="dv">30</span>, vmin<span class="op">=-</span><span class="dv">50</span>, vmax<span class="op">=</span>vmax),</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>        ax1.set_ylim(<span class="fl">23.5</span>, <span class="op">-</span><span class="fl">0.5</span>)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>        ax1.set_yticks(<span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">24</span>, <span class="dv">3</span>))</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>        ax1.set_yticklabels([<span class="ss">f"</span><span class="sc">{</span>h<span class="sc">:02d}</span><span class="ss">:00"</span> <span class="cf">for</span> h <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">24</span>, <span class="dv">3</span>)])</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>        ax1.set_ylabel(<span class="st">"Hour of day (CT)"</span>)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>        ax1.set_title(<span class="ss">f"ERCOT real-time SPP at </span><span class="sc">{</span>loc<span class="sc">}</span><span class="ss">  |  hour of day x date"</span>,</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>                      loc<span class="op">=</span><span class="st">"left"</span>, fontsize<span class="op">=</span><span class="dv">15</span>, fontweight<span class="op">=</span><span class="st">"bold"</span>)</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> x.<span class="bu">min</span>() <span class="op">&lt;=</span> RTCB_GO_LIVE <span class="op">&lt;=</span> x.<span class="bu">max</span>():</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>            ax1.axvline(RTCB_GO_LIVE, color<span class="op">=</span><span class="st">"#00f0c8"</span>, lw<span class="op">=</span><span class="dv">2</span>, ls<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>            ax1.text(RTCB_GO_LIVE, <span class="fl">22.8</span>, <span class="st">"  RTC+B go-live"</span>, color<span class="op">=</span><span class="st">"#00f0c8"</span>,</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>                     fontsize<span class="op">=</span><span class="dv">11</span>, va<span class="op">=</span><span class="st">"center"</span>, ha<span class="op">=</span><span class="st">"left"</span>, fontweight<span class="op">=</span><span class="st">"bold"</span>,</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>                     bbox<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">"#0b0f19"</span>, alpha<span class="op">=</span><span class="fl">0.75</span>, edgecolor<span class="op">=</span><span class="st">"none"</span>, pad<span class="op">=</span><span class="dv">2</span>))</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>        fig.colorbar(im, ax<span class="op">=</span>ax1, pad<span class="op">=</span><span class="fl">0.01</span>, fraction<span class="op">=</span><span class="fl">0.025</span>).set_label(<span class="st">"$/MWh (symlog)"</span>)</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Bottom: typical daily shape, before vs after</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> era, g <span class="kw">in</span> d.groupby(<span class="st">"era"</span>):</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>            prof <span class="op">=</span> g.groupby(<span class="st">"hour"</span>)[<span class="st">"spp"</span>].quantile([<span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="fl">0.9</span>]).unstack()</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>            ax2.fill_between(prof.index, prof[<span class="fl">0.1</span>], prof[<span class="fl">0.9</span>], color<span class="op">=</span>colors[era], alpha<span class="op">=</span><span class="fl">0.18</span>)</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>            ax2.plot(prof.index, prof[<span class="fl">0.5</span>], color<span class="op">=</span>colors[era], lw<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>                     label<span class="op">=</span><span class="ss">f"</span><span class="sc">{</span>era<span class="sc">}</span><span class="ss"> (median, p10-p90)"</span>)</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>        ax2.set_xlim(<span class="dv">0</span>, <span class="dv">23</span>)</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>        ax2.set_xticks(<span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">24</span>, <span class="dv">2</span>))</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>        ax2.set_xlabel(<span class="st">"Hour of day (CT)"</span>)</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>        ax2.set_ylabel(<span class="st">"$/MWh"</span>)</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>        ax2.set_title(<span class="st">"Typical daily price shape, before vs after"</span>, loc<span class="op">=</span><span class="st">"left"</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>        ax2.grid(alpha<span class="op">=</span><span class="fl">0.15</span>)</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>        ax2.legend(frameon<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>        fig.tight_layout()</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>        plt.show()</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> fig</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_rtcb(prices)                 <span class="co"># busiest location</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="co"># fig = plot_rtcb(prices, "HB_HOUSTON")  # or pick one</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="co"># fig.savefig("rtcb.png", dpi=200, facecolor=fig.get_facecolor())</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ercot_files/figure-html/cell-3-output-1.png" width="1335" height="854" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 
