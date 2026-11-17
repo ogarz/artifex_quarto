@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ogarz.github.io/artifex_quarto/about.html</loc>
-    <lastmod>2026-11-17T18:16:43.461Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ogarz.github.io/artifex_quarto/projects/ercot.html</loc>
-    <lastmod>2026-11-17T18:17:28.021Z</lastmod>
+    <loc>https://ogarz.github.io/artifex_quarto/index.html</loc>
+    <lastmod>2026-11-17T22:29:54.275Z</lastmod>
   </url>
   <url>
     <loc>https://ogarz.github.io/artifex_quarto/projects/ercot_analysis.html</loc>
-    <lastmod>2026-11-17T18:16:43.530Z</lastmod>
+    <lastmod>2026-11-17T22:29:54.277Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ogarz.github.io/artifex_quarto/about.html</loc>
+    <lastmod>2026-11-17T22:29:54.215Z</lastmod>
   </url>
   <url>
     <loc>https://ogarz.github.io/artifex_quarto/projects/ercot_ancillary_analysis.html</loc>
-    <lastmod>2026-11-17T18:16:43.533Z</lastmod>
+    <lastmod>2026-11-17T22:29:54.279Z</lastmod>
   </url>
   <url>
-    <loc>https://ogarz.github.io/artifex_quarto/index.html</loc>
-    <lastmod>2026-11-17T18:16:43.528Z</lastmod>
+    <loc>https://ogarz.github.io/artifex_quarto/projects/ercot.html</loc>
+    <lastmod>2026-11-17T22:30:39.781Z</lastmod>
   </url>
 </urlset>
